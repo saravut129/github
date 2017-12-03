@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Fast Order</string>
+
+    <string name="details_pajar">ที่อยู่: ตำบล พระปฐมเจดีย์ อำเภอเมืองนครปฐม นครปฐม 73000"\n"เปิดทุกวัน เวลา 5.00 - 4.00"\n"Tel.: 082-561-4000</string>
+    <string name="details_lankratib">ที่อยู่: 40/1 ถนน ยิงเป้า ตำบล พระปฐมเจดีย์ อำเภอเมืองนครปฐม นครปฐม 73000"\n"เปิดทุกวัน อาทิตย์ - ศุกร์ เวลา 11.00 - 21.00"\n"Tel.: 084-129-5547</string>
+</resources>
