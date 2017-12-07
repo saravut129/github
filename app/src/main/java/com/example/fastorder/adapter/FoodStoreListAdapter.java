@@ -1,65 +1,68 @@
 package com.example.fastorder.adapter;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fastorder.Model.FoodStoreItem;
 import com.example.fastorder.R;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 
 /**
- * Created by Admin on 2/12/2560.
+ * Created by Admin on 4/12/2560.
  */
 
 public class FoodStoreListAdapter extends ArrayAdapter<FoodStoreItem> {
 
-    private Context mContext;
-    private int mLayoutResId;
-    private ArrayList<FoodStoreItem> mFoodStoreList;
+    private Context mContext2;
+    private int mLayoutResId2;
+    private ArrayList<FoodStoreItem> mFoodStoreList2;
 
-    public FoodStoreListAdapter(Context context, int layoutResId, ArrayList<FoodStoreItem>  FoodStoreItemList){
-        super(context, layoutResId, FoodStoreItemList);
+    public FoodStoreListAdapter(Context context, int resource, ArrayList<FoodStoreItem> objects){
+        super(context, resource, objects);
 
-        this.mContext = context;
-        this.mLayoutResId = layoutResId;
-        this.mFoodStoreList = FoodStoreItemList;
+        this.mContext2 = context;
+        this.mLayoutResId2 = resource;
+        this.mFoodStoreList2 = objects;
     }
-
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(mContext);
+        LayoutInflater inflater = LayoutInflater.from(mContext2);
 
         View v = convertView;
-        if(v==null){
-            v = inflater.inflate(mLayoutResId, null);
+        if(v == null){
+            v = inflater.inflate(mLayoutResId2, null);
         }
+        Button bt = v.findViewById(R.id.button);
+        ImageView iv1 = v.findViewById(R.id.imageView);
+        TextView tv1 = v.findViewById(R.id.textView2);
+        TextView tv2 = v.findViewById(R.id.textView3);
 
-        ImageView iv = v.findViewById(R.id.imageView);
-        TextView tv1 = v.findViewById(R.id.textView);
-        TextView tv2 = v.findViewById(R.id.textView2);
+        FoodStoreItem foodStoreItem = mFoodStoreList2.get(position);
 
-        FoodStoreItem foodStoreItem = mFoodStoreList.get(position);
 
-        iv.setImageResource(foodStoreItem.picture);
         tv1.setText(
                 String.format(
                         Locale.getDefault(),
-                        "%s (%s)",
-                        foodStoreItem.thaiName,
-                        foodStoreItem.englishName
+                        "%s",
+                        foodStoreItem.thaiName
                 )
         );
-
         tv2.setText(
                 String.format(
                         Locale.getDefault(),
@@ -67,6 +70,23 @@ public class FoodStoreListAdapter extends ArrayAdapter<FoodStoreItem> {
                         foodStoreItem.details
                 )
         );
+
+        String pictureFileName = foodStoreItem.picture;
+
+        AssetManager am = mContext2.getAssets();
+        try {
+            InputStream stream = am.open(pictureFileName);
+            Drawable drawable = Drawable.createFromStream(stream, null);
+            iv1.setImageDrawable(drawable);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+            File pictureFile = new File(mContext2.getFilesDir(), pictureFileName);
+            Drawable drawable = Drawable.createFromPath(pictureFile.getAbsolutePath());
+            iv1.setImageDrawable(drawable);
+        }
+
         return v;
     }
 }

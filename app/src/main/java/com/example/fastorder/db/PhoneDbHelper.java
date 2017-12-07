@@ -20,7 +20,7 @@ public class PhoneDbHelper extends SQLiteOpenHelper {
     public static final String COL_NUMBER = "number";
     public static final String COL_PICTURE = "picture";
 
-    private static final String CREATE_TABLE = "CREATE TABLE"+ TABLE_NAME + "("
+    private static final String CREATE_TABLE = "CREATE TABLE "+ TABLE_NAME + "("
             + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COL_TITLE + " TEXT, "
             + COL_NUMBER + " TEXT, "
@@ -43,6 +43,7 @@ public class PhoneDbHelper extends SQLiteOpenHelper {
         cv.put(COL_PICTURE, "pajar.PNG");
         db.insert(TABLE_NAME, null, cv);
 
+        cv = new ContentValues();
         cv.put(COL_TITLE, "ล้านกระติ๊บ");
         cv.put(COL_NUMBER, "08xxxxxxxx");
         cv.put(COL_PICTURE, "lankratib.PNG");

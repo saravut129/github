@@ -5,15 +5,16 @@ package com.example.fastorder.Model;
  */
 
 public class FoodStoreItem {
-    public final String englishName;
+    public final int id;
     public final String thaiName;
-    public final int picture;
+    public final String picture;
     public final String details;
 
-    public FoodStoreItem(String englishName, String thaiName, int picture, String details) {
-        this.englishName = englishName;
+    public FoodStoreItem(int id, String thaiName, String details, String picture) {
+        this.id = id;
         this.thaiName = thaiName;
-        this.picture = picture;
         this.details = details;
+        this.picture = picture;
+
     }
 }
